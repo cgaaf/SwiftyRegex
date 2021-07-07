@@ -1,12 +1,12 @@
+////
+////  File.swift
+////  
+////
+////  Created by Chris Gaafary on 7/6/21.
+////
 //
-//  File.swift
-//  
+//import Foundation
 //
-//  Created by Chris Gaafary on 7/6/21.
-//
-
-import Foundation
-
-public protocol RegexConvertible {
-    func asRegex() -> Regex
-}
+//public protocol RegexConvertible {
+//    func asRegex() -> Regex
+//}

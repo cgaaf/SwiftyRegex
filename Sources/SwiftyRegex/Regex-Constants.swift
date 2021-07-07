@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Regex {
+public extension Regex {
     static let word = Regex(#"\w"#)
     static let digit = Regex(#"\d"#)
     static let whitespace = Regex(#"\s"#)
