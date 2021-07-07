@@ -2,10 +2,21 @@
     @testable import SwiftyRegex
 
     final class SwiftyRegexTests: XCTestCase {
-        func testExample() {
-            // This is an example of a functional test case.
-            // Use XCTAssert and related functions to verify your tests produce the correct
-            // results.
-            XCTAssertEqual(SwiftyRegex().text, "Hello, World!")
+        func testCharacterSet() {
+            XCTAssertEqual(Regex.characterSet("test").regexString, "[test]")
+        }
+        
+        func testNegatedSet() {
+            let regex = Regex {
+                Regex(.allLetters)
+                    .toNegatedSet()
+                
+                RegexGroup {
+                    Regex(.digitsOnly)
+                        .toCharacterSet()
+                }
+            }
+            
+            XCTAssertEqual(regex.regexString, #"[^a-zA-Z]([\d])"#)
         }
     }

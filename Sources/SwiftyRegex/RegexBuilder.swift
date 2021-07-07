@@ -16,4 +16,12 @@ public struct RegexBuilder {
         
         return Regex(reducedString)
     }
+    
+    public static func buildBlock(_ components: RegexConvertible...) -> Regex {
+        let reducedString = components.reduce("") { result, regex in
+            result + regex.asRegex().regexString
+        }
+        
+        return Regex(reducedString)
+    }
 }

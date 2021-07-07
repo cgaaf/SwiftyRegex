@@ -31,13 +31,16 @@ public extension Regex {
         return Regex(string)
     }
     
-    func matchAny() -> Regex {
+    func toCharacterSet() -> Regex {
         let string = "[\(self.regexString)]"
         return Regex(string)
     }
     
-    func matchAbsent() -> Regex {
+    func toNegatedSet() -> Regex {
         let string = "[^\(self.regexString)]"
         return Regex(string)
     }
+    
 }
+
+
