@@ -11,14 +11,20 @@ public struct Regex: RegexConvertible {
     public var regexString: String
     
     public init(_ inputString: String) {
-        self.regexString = inputString
-    }
-    
-    public init(@RegexBuilder _ regexBuilder: () -> Regex) {
-        self.regexString = regexBuilder().regexString
+        var string = ""
+        if inputString == "." {
+            string += #"\"#
+        }
+        
+        string += inputString
+        self.regexString = string
     }
     
     public func asRegex() -> Regex { self }
+    
+    static func buildRegex(@RegexBuilder _ regexBuilder: () -> Regex) -> Regex {
+        return regexBuilder()
+    }
 }
 
 public struct RegexGroup: RegexConvertible {

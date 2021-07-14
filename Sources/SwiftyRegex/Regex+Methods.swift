@@ -8,29 +8,6 @@
 import Foundation
 
 public extension Regex {
-    func repetitions(_ number: Int) -> Regex {
-        let string = "\(self.regexString){\(number)}"
-        return Regex(string)
-    }
-    
-    func repetitions(_ range: ClosedRange<Int>) -> Regex {
-        let bounds = "{\(range.lowerBound),\(range.upperBound)}"
-        let string = "\(self.regexString)\(bounds)"
-        return Regex(string)
-    }
-    
-    func repetitions(_ partialRangeFrom: PartialRangeFrom<Int>) -> Regex {
-        let bounds = "{\(partialRangeFrom.lowerBound),}"
-        let string = "\(self.regexString)\(bounds)"
-        return Regex(string)
-    }
-    
-    func repetitions(_ partialRangeTo: PartialRangeThrough<Int>) -> Regex {
-        let bounds = "{,\(partialRangeTo.upperBound)}"
-        let string = "\(self.regexString)\(bounds)"
-        return Regex(string)
-    }
-    
     func toCharacterSet() -> Regex {
         let string = "[\(self.regexString)]"
         return Regex(string)
@@ -39,6 +16,16 @@ public extension Regex {
     func toNegatedSet() -> Regex {
         let string = "[^\(self.regexString)]"
         return Regex(string)
+    }
+    
+    func beginningOfLine() -> Regex {
+        let str = "^\(self.regexString)"
+        return Regex(str)
+    }
+    
+    func endOfLine() -> Regex {
+        let str = "\(self.regexString)$"
+        return Regex(str)
     }
     
 }

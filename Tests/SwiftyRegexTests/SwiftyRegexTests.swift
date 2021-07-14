@@ -7,16 +7,36 @@
         }
         
         func testNegatedSet() {
-            let regex = Regex {
-                Regex(.allLetters)
+            let regex = Regex.buildRegex {
+                Regex(set: .letters)
                     .toNegatedSet()
-                
-                RegexGroup {
-                    Regex(.digitsOnly)
-                        .toCharacterSet()
-                }
             }
             
             XCTAssertEqual(regex.regexString, #"[^a-zA-Z]([\d])"#)
+        }
+        
+        func testEmailRegex() {
+            let regex = Regex.buildRegex {
+                Regex(set: .letters, .digits)
+                    .length(1...)
+                    .beginningOfLine()
+                
+                Regex("@")
+                
+                Regex(set: .letters, .digits)
+                    .length(1...)
+                
+                Regex(#"."#)
+                
+                Regex(set: .letters)
+                    .length(1...)
+                    .endOfLine()
+            }
+            
+            let testString = #"^[a-zA-Z\d]{1,}@[a-zA-Z\d]{1,}\.[a-zA-Z]{1,}$"#
+            
+
+            
+            XCTAssertEqual(regex.regexString, testString)
         }
     }
